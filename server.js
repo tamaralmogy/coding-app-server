@@ -149,5 +149,8 @@ io.on("connection", (socket) => {
   });
 });
 
-const PORT = process.env.PORT || 3001;
+const PORT =
+  process.env.PORT ||
+  3001 ||
+  "https://coding-app-server-production.up.railway.app";
 server.listen(PORT, () => console.log(`Server running on port ${PORT}`));
