@@ -6,7 +6,13 @@ const socketIo = require("socket.io");
 const cors = require("cors");
 
 const app = express();
-app.use(cors());
+app.use(
+  cors({
+    origin: "https://coding-app-client-production.up.railway.app",
+    methods: ["GET", "POST"],
+    credentials: true, // If you are using credentials (cookies, authorization headers, or TLS client certificates)
+  })
+);
 
 const codeBlocks = [
   { id: 1, name: "Async case", code: "// Async case initial code" },
@@ -29,6 +35,7 @@ const io = socketIo(server, {
   cors: {
     origin: "https://coding-app-client-production.up.railway.app/",
     methods: ["GET", "POST"],
+    credentials: true,
   },
 });
 
