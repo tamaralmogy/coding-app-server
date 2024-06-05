@@ -33,7 +33,7 @@ app.get("/", (req, res) => {
 const server = http.createServer(app);
 const io = socketIo(server, {
   cors: {
-    origin: "https://coding-app-client-production.up.railway.app/",
+    origin: "https://coding-app-client-production.up.railway.app",
     methods: ["GET", "POST"],
     credentials: true,
   },
