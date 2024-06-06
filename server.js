@@ -26,17 +26,9 @@ const codeBlocks = [
   { id: 4, name: "Fetch API usage", code: "// Fetch API usage initial code" },
 ];
 
-// Serve static files from the React app
-app.use(express.static(path.join(__dirname, "build")));
-
-// Updated API endpoint to get code blocks
-app.get("/codeblocks", (req, res) => {
+// API endpoint to get code blocks
+app.get("/", (req, res) => {
   res.json(codeBlocks);
-});
-
-// The "catchall" handler: for any request that doesn't match any route
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname + "/build/index.html"));
 });
 
 const server = http.createServer(app);
