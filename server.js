@@ -30,7 +30,7 @@ const codeBlocks = [
 app.use(express.static(path.join(__dirname, "build")));
 
 // Updated API endpoint to get code blocks
-app.get("/api/codeblocks", (req, res) => {
+app.get("/codeblocks", (req, res) => {
   res.json(codeBlocks);
 });
 
