@@ -4,13 +4,14 @@ const express = require("express");
 const http = require("http");
 const socketIo = require("socket.io");
 const cors = require("cors");
+const path = require("path");
 
 const app = express();
 app.use(
   cors({
     origin: "https://coding-app-client-production.up.railway.app",
     methods: ["GET", "POST"],
-    credentials: true, // If you are using credentials (cookies, authorization headers, or TLS client certificates)
+    credentials: true,
   })
 );
 
@@ -25,9 +26,17 @@ const codeBlocks = [
   { id: 4, name: "Fetch API usage", code: "// Fetch API usage initial code" },
 ];
 
-// API endpoint to get code blocks
-app.get("/", (req, res) => {
+// Serve static files from the React app
+app.use(express.static(path.join(__dirname, "build")));
+
+// Updated API endpoint to get code blocks
+app.get("/api/codeblocks", (req, res) => {
   res.json(codeBlocks);
+});
+
+// The "catchall" handler: for any request that doesn't match any route
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname + "/build/index.html"));
 });
 
 const server = http.createServer(app);
